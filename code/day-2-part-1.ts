@@ -9,10 +9,11 @@ const reports = readInput()
 
 function isSafe(report: string): boolean {
   const levels: number[] = report.split(/\s+/).map((x) => parseInt(x));
-  const n = levels.length;
+  const n = levels.length,
+    m = Math.floor(n / 2);
   let p = 0,
     q = 0;
-  for (let i = 1, j = n - 1; i < n && j > 0; i++, j--) {
+  for (let i = 1, j = n - 1; i <= m && j >= m; i++, j--) {
     const di = levels[i] - levels[i - 1],
       dj = levels[j] - levels[j - 1];
     if (
