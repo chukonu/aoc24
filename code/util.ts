@@ -5,3 +5,7 @@ export function readInput(): string {
   }
   return Deno.readTextFileSync(input);
 }
+
+export function sumUp(accu: number, curr: number): number {
+  return curr + accu;
+}
