@@ -6,6 +6,12 @@ export function readInput(): string {
   return Deno.readTextFileSync(input);
 }
 
+export function readLines(): string[] {
+  return readInput()
+    .split("\n")
+    .filter((l) => l);
+}
+
 /**
  * Yield sections from puzzle input. Sections are separated by empty lines.
  */
