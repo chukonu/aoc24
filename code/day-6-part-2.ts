@@ -85,24 +85,16 @@ const distinctPositions = GuardPositions(map, initial)
   .toArray()
   .reduce(toDistinctPositions, {});
 
-// console.log(Object.keys(distinctPositions).length);
-// console.log("starting position", initial);
-// console.log(distinctPositions);
-
 const answer = Object.values(distinctPositions)
-  //   .filter(
-  //     ({ value: [coord] }) => coord[0] !== initial[0] && coord[1] !== initial[1]
-  //   )
-  .map((x, i) => {
-    // console.log(i, x);
-    return modifiedMap(map, x.value[0]);
-  })
-  .filter((map, i) => {
+  .filter(
+    ({ value: [coord] }) => coord[0] !== initial[0] || coord[1] !== initial[1]
+  )
+  .map((x) => modifiedMap(map, x.value[0]))
+  .filter((map) => {
     const memo: Record<string, boolean> = {};
     for (const [coord, dir] of GuardPositions(map, initial)) {
       const hash = `${coord[0]}-${coord[1]}-${dir[0]}-${dir[1]}`;
       if (memo[hash]) {
-        // console.log(i);
         return true;
       }
       memo[hash] = true;
@@ -112,9 +104,3 @@ const answer = Object.values(distinctPositions)
 
 console.log("answer:", answer);
 console.timeEnd();
-
-// console.log(
-//   Object.values(distinctPositions).filter(
-//     ({ value: [coord] }) => coord[0] !== initial[0] && coord[1] !== initial[1]
-//   ).length
-// );
